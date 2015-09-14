@@ -31,11 +31,17 @@ SetCompressor /FINAL /SOLID lzma
 !define BUILD_DIR $%TILED_BUILD_DIR%          ; Build dir
 !endif
 
-!define SYSTEM_DIR "C:\windows\system32"
 !define ADD_REMOVE "Software\Microsoft\Windows\CurrentVersion\Uninstall\Tiled"
 !define PRODUCT_REG_KEY "Tiled Map Editor"
 
-InstallDir "$PROGRAMFILES\${P}"               ; Default installation directory
+!if ARCH == 32
+!define SYSTEM_DIR "C:\windows\system32"
+InstallDir "$PROGRAMFILES\${P}"               ; Default 32-bit installation directory
+!else
+!define SYSTEM_DIR "C:\windows\SysWOW64"
+InstallDir "$PROGRAMFILES64\${P}"             ; Default 64-bit installation directory
+!endif
+
 Name "${P}"                                   ; Name displayed on installer
 OutFile "${P_NORM}-${V}-win${ARCH}-setup.exe" ; Resulting installer filename
 BrandingText /TRIMLEFT "${P_NORM}-${V}"

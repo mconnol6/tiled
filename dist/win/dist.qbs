@@ -31,8 +31,8 @@ NSISSetup {
 
     files: {
         if (qbs.toolchain.contains("mingw"))
-            ["tiled-mingw.nsi"]
+            return ["tiled-mingw.nsi"]
         else
-            ["tiled-vs2013.nsi"]
+            return ["tiled-vs2013.nsi"]
     }
 }
