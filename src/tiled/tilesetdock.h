@@ -169,6 +169,7 @@ private:
     QAction *mEditTerrain;
     QAction *mAddTiles;
     QAction *mRemoveTiles;
+    QAction *mSearchForTile;
 
     QMap<MapDocument *, QString> mCurrentTilesets;
 

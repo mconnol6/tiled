@@ -197,6 +197,7 @@ TilesetDock::TilesetDock(QWidget *parent):
     mEditTerrain(new QAction(this)),
     mAddTiles(new QAction(this)),
     mRemoveTiles(new QAction(this)),
+    mSearchForTile(new QAction(this)),
     mTilesetMenuButton(new TilesetMenuButton(this)),
     mTilesetMenu(new QMenu(this)),
     mTilesetActionGroup(new QActionGroup(this)),
@@ -240,6 +241,7 @@ TilesetDock::TilesetDock(QWidget *parent):
     mEditTerrain->setIcon(QIcon(QLatin1String(":images/16x16/terrain.png")));
     mAddTiles->setIcon(QIcon(QLatin1String(":images/16x16/add.png")));
     mRemoveTiles->setIcon(QIcon(QLatin1String(":images/16x16/remove.png")));
+    mSearchForTile->setIcon(QIcon(QLatin1String(":images/16x16/document-new.png")));
 
     Utils::setThemeIcon(mNewTileset, "document-new");
     Utils::setThemeIcon(mImportTileset, "document-import");
@@ -248,6 +250,7 @@ TilesetDock::TilesetDock(QWidget *parent):
     Utils::setThemeIcon(mDeleteTileset, "edit-delete");
     Utils::setThemeIcon(mAddTiles, "add");
     Utils::setThemeIcon(mRemoveTiles, "remove");
+    Utils::setThemeIcon(mSearchForTile, "document-new");
 
     connect(mNewTileset, SIGNAL(triggered()),
             SIGNAL(newTileset()));
@@ -265,6 +268,8 @@ TilesetDock::TilesetDock(QWidget *parent):
             SLOT(addTiles()));
     connect(mRemoveTiles, SIGNAL(triggered()),
             SLOT(removeTiles()));
+    connect(mSearchForTile, SIGNAL(triggered()),
+            SIGNAL(searchForTile()));
 
     mToolBar->addAction(mNewTileset);
     mToolBar->setIconSize(QSize(16, 16));
@@ -275,6 +280,7 @@ TilesetDock::TilesetDock(QWidget *parent):
     mToolBar->addAction(mEditTerrain);
     mToolBar->addAction(mAddTiles);
     mToolBar->addAction(mRemoveTiles);
+    mToolBar->addAction(mSearchForTile);
 
     mZoomable = new Zoomable(this);
     mZoomComboBox = new QComboBox;
@@ -778,6 +784,7 @@ void TilesetDock::retranslateUi()
     mEditTerrain->setText(tr("Edit &Terrain Information"));
     mAddTiles->setText(tr("Add Tiles"));
     mRemoveTiles->setText(tr("Remove Tiles"));
+    mNewTileset->setText(tr("Search For Tile"));
 }
 
 Tileset *TilesetDock::currentTileset() const
