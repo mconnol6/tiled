@@ -122,6 +122,8 @@
 #include <QInputDialog>
 #include <QLineEdit>
 #include <QDir>
+#include <QRegExp>
+#include <QStringList>
 
 using namespace Tiled;
 using namespace Tiled::Internal;
@@ -1789,15 +1791,19 @@ bool MainWindow::searchForTile()
     if (!mMapDocument)
         return false;
 
-    //NewTilesetDialog newTileset(startLocation, this);
-    //SearchForTileDialog searchForTile;
     QInputDialog inputDialog(this);
 
     QString text = inputDialog.getText(this, tr("Search for a Tile"), tr("Enter property:value"), QLineEdit::Normal, QDir::home().dirName());
 
-    //inputDialog.exec();
+    QRegExp rx(tr("^\\S+:\\S+$"));    
 
-    std::cout << text.toStdString() << std::endl;    
+    QStringList strings = text.split(tr(":"));
+
+    if (strings.size() != 2)
+        return false;
+
+    std::cout << strings[0].toStdString() << std::endl;
+    std::cout << strings[1].toStdString() << std::endl;
 
     return true;
 }
