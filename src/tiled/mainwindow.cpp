@@ -27,6 +27,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <iostream>
+
 #include "aboutdialog.h"
 #include "addremovemapobject.h"
 #include "automappingmanager.h"
@@ -69,6 +71,7 @@
 #include "preferences.h"
 #include "preferencesdialog.h"
 #include "propertiesdock.h"
+#include "searchfortiledialog.h"
 #include "stampbrush.h"
 #include "terrainbrush.h"
 #include "tile.h"
@@ -116,6 +119,9 @@
 #include <QSignalMapper>
 #include <QShortcut>
 #include <QToolButton>
+#include <QInputDialog>
+#include <QLineEdit>
+#include <QDir>
 
 using namespace Tiled;
 using namespace Tiled::Internal;
@@ -365,6 +371,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
     connect(mUi->actionZoomNormal, SIGNAL(triggered()), SLOT(zoomNormal()));
 
     connect(mUi->actionNewTileset, SIGNAL(triggered()), SLOT(newTileset()));
+    connect(mUi->actionSearchForTile, SIGNAL(triggered()), SLOT(searchForTile()));
     connect(mUi->actionAddExternalTileset, SIGNAL(triggered()),
             SLOT(addExternalTileset()));
     connect(mUi->actionResizeMap, SIGNAL(triggered()), SLOT(resizeMap()));
@@ -438,6 +445,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
             mTileCollisionEditor, &TileCollisionEditor::setTile);
     connect(mTilesetDock, SIGNAL(newTileset()),
             this, SLOT(newTileset()));
+    connect(mTilesetDock, SIGNAL(searchForTile()),
+            this, SLOT(searchForTile()));
 
     connect(mTerrainDock, SIGNAL(currentTerrainChanged(const Terrain*)),
             this, SLOT(setTerrainBrush(const Terrain*)));
@@ -1773,4 +1782,22 @@ void MainWindow::closeMapDocument(int index)
 void MainWindow::reloadError(const QString &error)
 {
     QMessageBox::critical(this, tr("Error Reloading Map"), error);
+}
+
+bool MainWindow::searchForTile()
+{
+    if (!mMapDocument)
+        return false;
+
+    //NewTilesetDialog newTileset(startLocation, this);
+    //SearchForTileDialog searchForTile;
+    QInputDialog inputDialog(this);
+
+    inputDialog.getText(this, tr("Search for a Tile"), tr("Enter property:value"), QLineEdit::Normal, QDir::home().dirName());
+
+    inputDialog.exec();
+
+    
+
+    return true;
 }

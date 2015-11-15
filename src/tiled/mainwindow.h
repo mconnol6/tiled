@@ -145,6 +145,7 @@ private slots:
     void resizeMap();
     void offsetMap();
     void editMapProperties();
+    bool searchForTile();
 
     void updateWindowTitle();
     void updateActions();

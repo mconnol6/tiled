@@ -99,6 +99,7 @@ signals:
     void tilesetsDropped(const QStringList &paths);
 
     void newTileset();
+    void searchForTile();
 
 protected:
     void changeEvent(QEvent *e);
