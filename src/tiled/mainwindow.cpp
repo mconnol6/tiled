@@ -1793,11 +1793,11 @@ bool MainWindow::searchForTile()
     //SearchForTileDialog searchForTile;
     QInputDialog inputDialog(this);
 
-    inputDialog.getText(this, tr("Search for a Tile"), tr("Enter property:value"), QLineEdit::Normal, QDir::home().dirName());
+    QString text = inputDialog.getText(this, tr("Search for a Tile"), tr("Enter property:value"), QLineEdit::Normal, QDir::home().dirName());
 
-    inputDialog.exec();
+    //inputDialog.exec();
 
-    
+    std::cout << text.toStdString() << std::endl;    
 
     return true;
 }
