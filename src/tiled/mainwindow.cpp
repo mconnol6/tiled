@@ -1802,12 +1802,29 @@ bool MainWindow::searchForTile()
     if (strings.size() != 2)
         return false;
 
+    QString property = strings[0];
+    QString value = strings[1];
+
     std::cout << strings[0].toStdString() << std::endl;
     std::cout << strings[1].toStdString() << std::endl;
 
     TilesetManager *tilesetManager = TilesetManager::instance();
 
     QList<SharedTileset> tilesets = tilesetManager->tilesets();
+
+    for (SharedTileset &tileset : tilesets) {
+
+        for (Tile* tile : tileset->tiles()) {
+
+            if (tile->hasProperty(property)) {
+
+                if (tile->property(property) == value) {
+
+                    std::cout << "hit!" << std::endl;
+                }
+            }
+        }
+    }
 
     return true;
 }
