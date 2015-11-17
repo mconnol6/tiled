@@ -1805,9 +1805,6 @@ bool MainWindow::searchForTile()
     QString property = strings[0];
     QString value = strings[1];
 
-    std::cout << strings[0].toStdString() << std::endl;
-    std::cout << strings[1].toStdString() << std::endl;
-
     TilesetManager *tilesetManager = TilesetManager::instance();
 
     QList<SharedTileset> tilesets = tilesetManager->tilesets();
