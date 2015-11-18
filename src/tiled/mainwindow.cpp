@@ -1797,6 +1797,10 @@ bool MainWindow::searchForTile()
 
     QRegExp rx(tr("^\\S+:\\S+$"));    
 
+    if (!rx.exactMatch(text)) {
+        std::cout << "not correct syntax" << std::endl;
+    }
+
     QStringList strings = text.split(tr(":"));
 
     if (strings.size() != 2)
@@ -1817,7 +1821,7 @@ bool MainWindow::searchForTile()
 
                 if (tile->property(property) == value) {
 
-                    std::cout << "hit!" << std::endl;
+                    std::cout << "Tile Id: " << tile->id() << ", Tileset name: " << tileset->name().toStdString() << std::endl;
                 }
             }
         }
