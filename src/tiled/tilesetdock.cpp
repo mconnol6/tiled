@@ -270,6 +270,8 @@ TilesetDock::TilesetDock(QWidget *parent):
             SLOT(removeTiles()));
     connect(mSearchForTile, SIGNAL(triggered()),
             SIGNAL(searchForTile()));
+    connect(mSelectAllTiles, SIGNAL(triggered()),
+	    SIGNAL(selectAllTiles()));
 
     mToolBar->addAction(mNewTileset);
     mToolBar->setIconSize(QSize(16, 16));

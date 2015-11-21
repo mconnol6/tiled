@@ -96,6 +96,21 @@
      <string>&amp;Map</string>
     </property>
     <addaction name="actionNewTileset"/>
+
+
+
+
+
+
+    
+    <addaction name ="actionSearchForTile"/>
+    <addaction name ="actionSelectAllTiles"/>
+    
+
+
+
+
+
     <addaction name="actionAddExternalTileset"/>
     <addaction name="separator"/>
     <addaction name="actionResizeMap"/>
@@ -291,6 +306,25 @@
     <string>&amp;New...</string>
    </property>
   </action>
+
+  <action name="actionSelectAllTiles">
+   <property name ="icon">
+    <iconset resource="tiled.qrc">
+     <normaloff>:/images/16x16/document-new.png</normaloff>:/images/16x16/document-new.png</iconset>
+   <property name="text">
+    <string>Select &amp;All</string>
+   </property>
+  </action>
+
+  <action name="actionSearchForTile">
+   <property name="icon">
+    <iconset resource="tiled.qrc">
+     <normaloff>:/images/16x16/document-new.png</normaloff>:/images/16x16/document-new.png</iconset>
+   <property name="text">
+    <string>&amp;Search</string>
+   </property>
+  </action>
+
   <action name="actionNewTileset">
    <property name="icon">
     <iconset resource="tiled.qrc">
