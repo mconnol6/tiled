@@ -18,6 +18,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <iostream>
 #include "changeproperties.h"
 
 #include "mapdocument.h"
@@ -68,6 +69,7 @@ SetProperty::SetProperty(MapDocument *mapDocument,
     , mName(name)
     , mValue(value)
 {
+    std::cout << "hi" << std::endl;
     foreach (Object *obj, mObjects) {
         ObjectProperty prop;
         prop.existed = obj->hasProperty(mName);

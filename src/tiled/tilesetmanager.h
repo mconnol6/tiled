@@ -23,6 +23,7 @@
 #define TILESETMANAGER_H
 
 #include "tileset.h"
+#include "tile.h"
 
 #include <QObject>
 #include <QList>
@@ -168,6 +169,7 @@ private:
      * Stores the tilesets and maps them to the number of references.
      */
     QMap<SharedTileset, int> mTilesets;
+    QMap<QString, QList<Tile *>> properties;
     FileSystemWatcher *mWatcher;
     TileAnimationDriver *mAnimationDriver;
     QSet<QString> mChangedFiles;
