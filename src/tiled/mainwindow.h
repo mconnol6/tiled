@@ -146,6 +146,7 @@ private slots:
     void offsetMap();
     void editMapProperties();
     bool searchForTile();
+    bool selectAllTiles();
 
     void updateWindowTitle();
     void updateActions();

@@ -100,6 +100,7 @@ signals:
 
     void newTileset();
     void searchForTile();
+    void selectAllTiles();
 
 protected:
     void changeEvent(QEvent *e);

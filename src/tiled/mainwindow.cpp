@@ -373,7 +373,12 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
     connect(mUi->actionZoomNormal, SIGNAL(triggered()), SLOT(zoomNormal()));
 
     connect(mUi->actionNewTileset, SIGNAL(triggered()), SLOT(newTileset()));
+	
+    //My addition
     connect(mUi->actionSearchForTile, SIGNAL(triggered()), SLOT(searchForTile()));
+    connect(mUi->actionSelectAllTiles, SIGNAL(triggered()), SLOT(selectAllTiles()));
+    
+
     connect(mUi->actionAddExternalTileset, SIGNAL(triggered()),
             SLOT(addExternalTileset()));
     connect(mUi->actionResizeMap, SIGNAL(triggered()), SLOT(resizeMap()));
@@ -420,6 +425,12 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
     setThemeIcon(mUi->actionZoomOut, "zoom-out");
     setThemeIcon(mUi->actionZoomNormal, "zoom-original");
     setThemeIcon(mUi->actionNewTileset, "document-new");
+
+    //My addition
+    setThemeIcon(mUi->actionSelectAllTiles, "select-tiles");
+    setThemeIcon(mUi->actionSearchForTile, "search");
+
+
     setThemeIcon(mUi->actionResizeMap, "document-page-setup");
     setThemeIcon(mUi->actionMapProperties, "document-properties");
     setThemeIcon(mUi->actionDocumentation, "help-contents");
@@ -449,6 +460,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
             this, SLOT(newTileset()));
     connect(mTilesetDock, SIGNAL(searchForTile()),
             this, SLOT(searchForTile()));
+    connect(mTilesetDock, SIGNAL(selectAllTiles()),
+	    this, SLOT(selectAllTiles()));
 
     connect(mTerrainDock, SIGNAL(currentTerrainChanged(const Terrain*)),
             this, SLOT(setTerrainBrush(const Terrain*)));
@@ -1497,6 +1510,11 @@ void MainWindow::updateActions()
     mUi->actionPaste->setEnabled(ClipboardManager::instance()->hasMap());
     mUi->actionDelete->setEnabled(canCopy);
     mUi->actionNewTileset->setEnabled(map);
+
+    //My addition
+    mUi->actionSelectAllTiles->setEnabled(map);
+    mUi->actionSearchForTile->setEnabled(map);
+
     mUi->actionAddExternalTileset->setEnabled(map);
     mUi->actionResizeMap->setEnabled(map);
     mUi->actionOffsetMap->setEnabled(map);
@@ -1828,3 +1846,51 @@ bool MainWindow::searchForTile()
 
     return true;
 }
+
+
+
+bool MainWindow::selectAllTiles()
+{
+    if (!mMapDocument)
+        return false;
+
+	// make a button that gets current custom properties
+
+    QInputDialog inputDialog(this);
+
+    QString text = inputDialog.getText(this, tr("S earch for a Tile"), tr("Enter property:value"), QLineEdit::Normal, QDir::home().dirName());
+
+    QRegExp rx(tr("^\\S+:\\S+$"));    
+
+    QStringList strings = text.split(tr(":"));
+
+    if (strings.size() != 2)
+        return false;
+
+    QString property = strings[0];
+    QString value = strings[1];
+
+    std::cout << strings[0].toStdString() << std::endl;
+    std::cout << strings[1].toStdString() << std::endl;
+
+    TilesetManager *tilesetManager = TilesetManager::instance();
+
+    QList<SharedTileset> tilesets = tilesetManager->tilesets();
+
+    for (SharedTileset &tileset : tilesets) {
+
+        for (Tile* tile : tileset->tiles()) {
+
+            if (tile->hasProperty(property)) {
+
+                if (tile->property(property) == value) {
+
+		    std::cout << "woo" << std::endl;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
