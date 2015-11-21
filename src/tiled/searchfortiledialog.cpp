@@ -19,7 +19,7 @@
  */
 
 #include "searchfortiledialog.h"
-#include "ui_searchfortiledialog.h"
+//#include "ui_searchfortiledialog.h"
 #include <iostream>
 
 using namespace Tiled;

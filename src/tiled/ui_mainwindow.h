@@ -41,8 +41,11 @@ public:
     QAction *actionSaveAs;
     QAction *actionNew;
     QAction *actionNewTileset;
+<<<<<<< HEAD
     QAction *actionSearchForTile;
     QAction *actionSelectAllTiles;
+=======
+>>>>>>> 01bb6fb407c7f0a37aaa4bc1b6722ddef95be7d9
     QAction *actionClose;
     QAction *actionZoomIn;
     QAction *actionZoomOut;
@@ -69,6 +72,10 @@ public:
     QAction *actionNoLabels;
     QAction *actionLabelsForSelectedObjects;
     QAction *actionLabelsForAllObjects;
+<<<<<<< HEAD
+=======
+    QAction *actionSearchForTile;
+>>>>>>> 01bb6fb407c7f0a37aaa4bc1b6722ddef95be7d9
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QMenuBar *menuBar;
@@ -155,6 +162,7 @@ public:
         actionNewTileset = new QAction(MainWindow);
         actionNewTileset->setObjectName(QStringLiteral("actionNewTileset"));
         actionNewTileset->setIcon(icon9);
+<<<<<<< HEAD
 
 	//My addition
 	actionSelectAllTiles = new QAction(MainWindow);
@@ -166,6 +174,9 @@ public:
 	actionSearchForTile->setObjectName(QStringLiteral("actionSearchForTile:"));
 	actionSearchForTile->setIcon(icon9);
 
+=======
+	actionSearchForTile = new QAction(MainWindow);
+>>>>>>> 01bb6fb407c7f0a37aaa4bc1b6722ddef95be7d9
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QStringLiteral("actionClose"));
         QIcon icon10;
@@ -323,12 +334,15 @@ public:
         menuHelp->addAction(actionBecomePatron);
         menuHelp->addAction(actionAbout);
         menuMap->addAction(actionNewTileset);
+<<<<<<< HEAD
 	
 	//My addition
 	menuMap->addAction(actionSearchForTile);
 	menuMap->addAction(actionSelectAllTiles);
 
 
+=======
+>>>>>>> 01bb6fb407c7f0a37aaa4bc1b6722ddef95be7d9
         menuMap->addAction(actionAddExternalTileset);
         menuMap->addSeparator();
         menuMap->addAction(actionResizeMap);
@@ -379,11 +393,14 @@ public:
         actionSaveAs->setText(QApplication::translate("MainWindow", "Save &As...", 0));
         actionNew->setText(QApplication::translate("MainWindow", "&New...", 0));
         actionNewTileset->setText(QApplication::translate("MainWindow", "New &Tileset...", 0));
+<<<<<<< HEAD
 	
 	//My addition
 	actionSelectAllTiles->setText(QApplication::translate("MainWindow", "Select &Tiles", 0));
 	actionSearchForTile->setText(QApplication::translate("MainWindow", "Search", 0));	
 
+=======
+>>>>>>> 01bb6fb407c7f0a37aaa4bc1b6722ddef95be7d9
         actionClose->setText(QApplication::translate("MainWindow", "&Close", 0));
         actionZoomIn->setText(QApplication::translate("MainWindow", "Zoom In", 0));
         actionZoomOut->setText(QApplication::translate("MainWindow", "Zoom Out", 0));

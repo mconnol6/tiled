@@ -1815,20 +1815,29 @@ bool MainWindow::searchForTile()
 
     QRegExp rx(tr("^\\S+:\\S+$"));    
 
+    if (!rx.exactMatch(text)) {
+        QMessageBox resultsDialog(this);
+        resultsDialog.setText(tr("Incorrect syntax"));
+        resultsDialog.exec();
+        return false;
+    }
+
     QStringList strings = text.split(tr(":"));
 
-    if (strings.size() != 2)
+    if (strings.size() != 2) {
+        QMessageBox resultsDialog(this);
+        resultsDialog.setText(tr("Incorrect syntax"));
+        resultsDialog.exec();
         return false;
+    }
 
     QString property = strings[0];
     QString value = strings[1];
 
-    std::cout << strings[0].toStdString() << std::endl;
-    std::cout << strings[1].toStdString() << std::endl;
-
     TilesetManager *tilesetManager = TilesetManager::instance();
 
     QList<SharedTileset> tilesets = tilesetManager->tilesets();
+    QVector<Tile *> results;
 
     for (SharedTileset &tileset : tilesets) {
 
@@ -1838,11 +1847,20 @@ bool MainWindow::searchForTile()
 
                 if (tile->property(property) == value) {
 
-                    std::cout << "hit!" << std::endl;
+                    results.append(tile);
                 }
             }
         }
     }
+
+    for (Tile * tile : results) {
+        std::cout << "Tile Id: " << tile->id() << ", Tileset name: " << tile->tileset()->name().toStdString() << std::endl;
+    }
+        
+
+    QMessageBox resultsDialog(this);
+    resultsDialog.setText(tr("hey"));
+    resultsDialog.exec();
 
     return true;
 }
