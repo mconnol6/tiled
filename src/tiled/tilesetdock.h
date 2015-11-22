@@ -172,6 +172,7 @@ private:
     QAction *mAddTiles;
     QAction *mRemoveTiles;
     QAction *mSearchForTile;
+    QAction *mSelectAllTiles;
 
     QMap<MapDocument *, QString> mCurrentTilesets;
 
