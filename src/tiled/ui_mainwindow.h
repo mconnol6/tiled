@@ -36,6 +36,7 @@ public:
     QAction *actionAboutQt;
     QAction *actionResizeMap;
     QAction *actionMapProperties;
+    QAction *actionSearchForTile;
     QAction *actionAutoMap;
     QAction *actionShowGrid;
     QAction *actionSaveAs;
@@ -67,7 +68,6 @@ public:
     QAction *actionNoLabels;
     QAction *actionLabelsForSelectedObjects;
     QAction *actionLabelsForAllObjects;
-    QAction *actionSearchForTile;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QMenuBar *menuBar;
@@ -153,8 +153,9 @@ public:
         actionNew->setIcon(icon9);
         actionNewTileset = new QAction(MainWindow);
         actionNewTileset->setObjectName(QStringLiteral("actionNewTileset"));
+        actionSearchForTile = new QAction(MainWindow);
+        actionSearchForTile->setObjectName(QStringLiteral("actionSearchForTile"));
         actionNewTileset->setIcon(icon9);
-	actionSearchForTile = new QAction(MainWindow);
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QStringLiteral("actionClose"));
         QIcon icon10;
