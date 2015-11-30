@@ -1820,37 +1820,15 @@ bool MainWindow::searchForTile()
 
     TilesetManager *tilesetManager = TilesetManager::instance();
 
-    std::cout << "size of properties: " << tilesetManager->getTilesFromProperties(property, value).size() << std::endl;
-
-    for ( Tile *tile : tilesetManager->getTilesFromProperties(property, value)) {
-        std::cout << tile->id() << " " << tile->tileset()->name().toStdString() <<  std::endl;
-
-    }
-
-    QList<SharedTileset> tilesets = tilesetManager->tilesets();
-    QVector<Tile *> results;
-
-    for (SharedTileset &tileset : tilesets) {
-
-        for (Tile* tile : tileset->tiles()) {
-
-            if (tile->hasProperty(property)) {
-
-                if (tile->property(property) == value) {
-
-                    results.append(tile);
-                }
-            }
-        }
-    }
-
     QString results_text;
+    QSet<Tile *> tiles = tilesetManager->getTilesFromProperties(property, value);
 
-    for (Tile * tile : results) {
-
+    for ( Tile *tile : tiles) {
 	results_text.append(QString::fromStdString(std::string(std::string("\n") + std::string(tile->tileset()->name().toStdString())) + std::string(" ")));
         results_text.append(QString::fromStdString(std::to_string(tile->id())));
+
     }
+
 
     QMessageBox resultsDialog(this);
     resultsDialog.setText(results_text);
