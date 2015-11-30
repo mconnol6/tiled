@@ -124,6 +124,8 @@
 #include <QDir>
 #include <QRegExp>
 #include <QStringList>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 using namespace Tiled;
 using namespace Tiled::Internal;
@@ -1835,14 +1837,17 @@ bool MainWindow::searchForTile()
         }
     }
 
+    QString results_text;
+
     for (Tile * tile : results) {
-        std::cout << "Tile Id: " << tile->id() << ", Tileset name: " << tile->tileset()->name().toStdString() << std::endl;
+
+	results_text.append(QString::fromStdString(std::string(std::string("\n") + std::string(tile->tileset()->name().toStdString())) + std::string(" ")));
+        results_text.append(QString::fromStdString(std::to_string(tile->id())));
     }
-        
 
     QMessageBox resultsDialog(this);
-    resultsDialog.setText(tr("hey"));
+    resultsDialog.setText(results_text);
     resultsDialog.exec();
-
+    
     return true;
 }
