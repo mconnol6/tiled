@@ -30,7 +30,6 @@
 #define OBJECT_H
 
 #include "properties.h"
-#include <iostream>
 
 namespace Tiled {
 
@@ -102,9 +101,7 @@ public:
      * Sets the value of the object's \a name property to \a value.
      */
     void setProperty(const QString &name, const QString &value)
-    { 
-	mProperties.insert(name, value); 
-    }
+    { mProperties.insert(name, value); }
 
     /**
      * Removes the property with the given \a name.
