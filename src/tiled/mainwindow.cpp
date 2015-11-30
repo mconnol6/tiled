@@ -1820,8 +1820,10 @@ bool MainWindow::searchForTile()
 
     TilesetManager *tilesetManager = TilesetManager::instance();
 
+    std::cout << "size of properties: " << tilesetManager->getTilesFromProperties(property, value).size() << std::endl;
+
     for ( Tile *tile : tilesetManager->getTilesFromProperties(property, value)) {
-        std::cout << "Hi" << std::endl;
+        std::cout << tile->id() << " " << tile->tileset()->name().toStdString() <<  std::endl;
 
     }
 

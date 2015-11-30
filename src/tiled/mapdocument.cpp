@@ -982,13 +982,13 @@ void MapDocument::setProperties(Object *object, const Properties &properties)
 
 void MapDocument::removeProperty(Object *object, const QString &name)
 {
-    object->removeProperty(name);
-    emit propertyRemoved(object, name);
     if (object->typeId() == 5) {
         TilesetManager *tilesetManager = TilesetManager::instance();
         QString previous = object->property(name);
         tilesetManager->removeProperty(name, previous, dynamic_cast<Tile *>(object));
     }
+    object->removeProperty(name);
+    emit propertyRemoved(object, name);
 }
 
 void MapDocument::createRenderer()

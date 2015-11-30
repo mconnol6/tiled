@@ -134,7 +134,7 @@ public:
     void insertProperty(QString property, QString value, Tile *tile);
     void editProperty(QString property, QString value, Tile *tile);
     void removeProperty(QString property, QString value, Tile *tile);
-    QSet<Tile *>& getTilesFromProperties(QString property, QString value);
+    QSet<Tile *> getTilesFromProperties(QString property, QString value);
 
 signals:
     /**

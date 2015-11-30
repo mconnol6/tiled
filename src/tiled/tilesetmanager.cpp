@@ -208,17 +208,13 @@ void TilesetManager::advanceTileAnimations(int ms)
 }
 
 void TilesetManager::insertProperty(QString property, QString value, Tile *tile) {
-    if (properties[property][value].count() == 0) {
-        std::cout << "inserting property" << std::endl;
         properties[property][value].insert(tile);
-    }
 
 }
 void TilesetManager::removeProperty(QString property, QString value, Tile *tile) {
-    std::cout << "removing property" << std::endl;
     properties[property][value].remove(tile);
 }
 
-QSet<Tile *>& TilesetManager::getTilesFromProperties(QString property, QString value) {
+QSet<Tile *> TilesetManager::getTilesFromProperties(QString property, QString value) {
     return properties[property][value];
 }
