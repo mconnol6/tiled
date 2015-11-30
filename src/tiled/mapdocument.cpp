@@ -953,11 +953,24 @@ void MapDocument::setProperty(Object *object,
                               const QString &value)
 {
     const bool hadProperty = object->hasProperty(name);
+    QString previous = object->property(name);
     object->setProperty(name, value);
 
-    if (hadProperty)
+
+    TilesetManager *tilesetmanager = TilesetManager::instance();
+
+    if (object->typeId() == 5) {
+        tilesetmanager->insertProperty(name, value, dynamic_cast<Tile *>(object));
+    }
+    if (hadProperty) {
         emit propertyChanged(object, name);
-    else
+
+        //delete old value from properties map
+        if (object->typeId() == 5) {
+            tilesetmanager->removeProperty(name, previous, dynamic_cast<Tile *>(object));
+        }
+    }
+    else 
         emit propertyAdded(object, name);
 }
 
@@ -971,6 +984,11 @@ void MapDocument::removeProperty(Object *object, const QString &name)
 {
     object->removeProperty(name);
     emit propertyRemoved(object, name);
+    if (object->typeId() == 5) {
+        TilesetManager *tilesetManager = TilesetManager::instance();
+        QString previous = object->property(name);
+        tilesetManager->removeProperty(name, previous, dynamic_cast<Tile *>(object));
+    }
 }
 
 void MapDocument::createRenderer()

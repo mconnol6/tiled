@@ -23,6 +23,7 @@
 #define TILESETMANAGER_H
 
 #include "tileset.h"
+#include "tile.h"
 
 #include <QObject>
 #include <QList>
@@ -130,6 +131,11 @@ public:
     void setAnimateTiles(bool enabled);
     bool animateTiles() const;
 
+    void insertProperty(QString property, QString value, Tile *tile);
+    void editProperty(QString property, QString value, Tile *tile);
+    void removeProperty(QString property, QString value, Tile *tile);
+    QSet<Tile *>& getTilesFromProperties(QString property, QString value);
+
 signals:
     /**
      * Emitted when a tileset's images have changed and views need updating.
@@ -173,6 +179,7 @@ private:
     QSet<QString> mChangedFiles;
     QTimer mChangedFilesTimer;
     bool mReloadTilesetsOnChange;
+    QMap<QString, QMap<QString, QSet<Tile *>>> properties;
 };
 
 inline bool TilesetManager::reloadTilesetsOnChange() const

@@ -53,6 +53,8 @@
 
 #include <QCoreApplication>
 
+#include <iostream>
+
 namespace Tiled {
 namespace Internal {
 

@@ -1820,6 +1820,11 @@ bool MainWindow::searchForTile()
 
     TilesetManager *tilesetManager = TilesetManager::instance();
 
+    for ( Tile *tile : tilesetManager->getTilesFromProperties(property, value)) {
+        std::cout << "Hi" << std::endl;
+
+    }
+
     QList<SharedTileset> tilesets = tilesetManager->tilesets();
     QVector<Tile *> results;
 
