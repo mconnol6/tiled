@@ -28,6 +28,8 @@
 #include "ui_mainwindow.h"
 
 #include <iostream>
+#include <chrono>
+using namespace std::chrono;
 
 #include "aboutdialog.h"
 #include "addremovemapobject.h"
@@ -1820,6 +1822,10 @@ bool MainWindow::searchForTile()
 
     TilesetManager *tilesetManager = TilesetManager::instance();
 
+    milliseconds start = duration_cast<milliseconds> (
+	system_clock::now().time_since_epoch()
+	);
+
     QString results_text;
     QSet<Tile *> tiles = tilesetManager->getTilesFromProperties(property, value);
 
@@ -1829,6 +1835,13 @@ bool MainWindow::searchForTile()
 
     }
 
+    milliseconds end = duration_cast<milliseconds> (
+	system_clock::now().time_since_epoch()
+	);
+
+    milliseconds duration = end - start;
+
+    std::cout << duration.count() << std::endl;
 
     QMessageBox resultsDialog(this);
     resultsDialog.setText(results_text);
