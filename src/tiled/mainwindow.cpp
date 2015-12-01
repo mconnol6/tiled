@@ -1822,7 +1822,7 @@ bool MainWindow::searchForTile()
 
     TilesetManager *tilesetManager = TilesetManager::instance();
 
-    milliseconds start = duration_cast<milliseconds> (
+    microseconds start = duration_cast<microseconds> (
 	system_clock::now().time_since_epoch()
 	);
 
@@ -1835,13 +1835,13 @@ bool MainWindow::searchForTile()
 
     }
 
-    milliseconds end = duration_cast<milliseconds> (
+    microseconds end = duration_cast<microseconds> (
 	system_clock::now().time_since_epoch()
 	);
 
-    milliseconds duration = end - start;
+    int duration = end.count() - start.count();
 
-    std::cout << duration.count() << std::endl;
+    std::cout << duration << std::endl;
 
     QMessageBox resultsDialog(this);
     resultsDialog.setText(results_text);
