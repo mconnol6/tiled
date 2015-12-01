@@ -1844,7 +1844,12 @@ bool MainWindow::searchForTile()
     std::cout << duration << std::endl;
 
     QMessageBox resultsDialog(this);
-    resultsDialog.setText(results_text);
+
+    if (tiles.size() > 0) {
+    	resultsDialog.setText(results_text);
+    } else {
+	resultsDialog.setText(tr("No results"));
+    }
     resultsDialog.exec();
     
     return true;
