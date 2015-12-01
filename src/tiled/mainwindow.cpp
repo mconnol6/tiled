@@ -23,7 +23,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
+#include <ctime>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -126,6 +126,7 @@
 #include <QStringList>
 #include <QDialogButtonBox>
 #include <QPushButton>
+#include <ctime>
 
 using namespace Tiled;
 using namespace Tiled::Internal;
@@ -1790,6 +1791,7 @@ void MainWindow::reloadError(const QString &error)
 
 bool MainWindow::searchForTile()
 {
+
     if (!mMapDocument)
         return false;
 
@@ -1819,6 +1821,8 @@ bool MainWindow::searchForTile()
     QString value = strings[1];
 
     TilesetManager *tilesetManager = TilesetManager::instance();
+    
+    clock_t times = std::clock();
 
     QList<SharedTileset> tilesets = tilesetManager->tilesets();
     QVector<Tile *> results;
@@ -1845,9 +1849,18 @@ bool MainWindow::searchForTile()
         results_text.append(QString::fromStdString(std::to_string(tile->id())));
     }
 
+    clock_t timed = clock();
+
+    times = timed-times;
+
+    double diffticks = timed-times;
+
+    double diffms = (diffticks)/(CLOCKS_PER_SEC/1000);
+    std::cout << diffms << std::endl;
+   
     QMessageBox resultsDialog(this);
     resultsDialog.setText(results_text);
     resultsDialog.exec();
-    
+
     return true;
 }
