@@ -28,6 +28,8 @@
 #include "ui_mainwindow.h"
 
 #include <iostream>
+#include <chrono>
+using namespace std::chrono;
 
 #include "aboutdialog.h"
 #include "addremovemapobject.h"
@@ -126,7 +128,6 @@
 #include <QStringList>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <ctime>
 
 using namespace Tiled;
 using namespace Tiled::Internal;
@@ -1822,7 +1823,9 @@ bool MainWindow::searchForTile()
 
     TilesetManager *tilesetManager = TilesetManager::instance();
     
-    clock_t times = std::clock();
+    microseconds start= duration_cast<microseconds> (
+	system_clock::now().time_since_epoch()
+	);
 
     QList<SharedTileset> tilesets = tilesetManager->tilesets();
     QVector<Tile *> results;
@@ -1849,14 +1852,13 @@ bool MainWindow::searchForTile()
         results_text.append(QString::fromStdString(std::to_string(tile->id())));
     }
 
-    clock_t timed = clock();
+    microseconds end = duration_cast<microseconds> (
+	system_clock::now().time_since_epoch()
+	);
 
-    times = timed-times;
+    int duration = end.count() - start.count();
 
-    double diffticks = timed-times;
-
-    double diffms = (diffticks)/(CLOCKS_PER_SEC/1000);
-    std::cout << diffms << std::endl;
+    std::cout << duration << std::endl;
    
     QMessageBox resultsDialog(this);
     resultsDialog.setText(results_text);
