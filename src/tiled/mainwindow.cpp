@@ -1822,11 +1822,11 @@ bool MainWindow::searchForTile()
     QString value = strings[1];
 
     TilesetManager *tilesetManager = TilesetManager::instance();
-    
     microseconds start= duration_cast<microseconds> (
 	system_clock::now().time_since_epoch()
 	);
 
+    
     QList<SharedTileset> tilesets = tilesetManager->tilesets();
     QVector<Tile *> results;
 
@@ -1861,7 +1861,12 @@ bool MainWindow::searchForTile()
     std::cout << duration << std::endl;
    
     QMessageBox resultsDialog(this);
-    resultsDialog.setText(results_text);
+
+    if (results.size() > 0) {
+    	resultsDialog.setText(results_text);
+    } else {
+        resultsDialog.setText(tr("No results"));
+    }
     resultsDialog.exec();
 
     return true;
