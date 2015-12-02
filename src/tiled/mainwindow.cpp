@@ -1827,7 +1827,7 @@ bool MainWindow::searchForTile()
 	);
 
     QString results_text;
-    QSet<Tile *> tiles = tilesetManager->getTilesFromProperties(property, value);
+    QSet<Tile *>& tiles = tilesetManager->getTilesFromProperties(property, value);
 
     for ( Tile *tile : tiles) {
 	results_text.append(QString::fromStdString(std::string(std::string("\n") + std::string(tile->tileset()->name().toStdString())) + std::string(" ")));

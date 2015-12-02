@@ -215,6 +215,6 @@ void TilesetManager::removeProperty(QString property, QString value, Tile *tile)
     properties[property][value].remove(tile);
 }
 
-QSet<Tile *> TilesetManager::getTilesFromProperties(QString property, QString value) {
+QSet<Tile *>& TilesetManager::getTilesFromProperties(QString property, QString value) {
     return properties[property][value];
 }
