@@ -1798,7 +1798,7 @@ bool MainWindow::searchForTile()
 
     QInputDialog inputDialog(this);
 
-    QString text = inputDialog.getText(this, tr("Search for a Tile"), tr("Enter property:value"), QLineEdit::Normal, QDir::home().dirName());
+    QString text = inputDialog.getText(this, tr("Search for a Tile"), tr("Enter property:value"), QLineEdit::Normal, tr(""));
 
     QRegExp rx(tr("^\\S+:\\S+$"));    
 

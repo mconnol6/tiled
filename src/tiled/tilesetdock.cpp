@@ -241,7 +241,6 @@ TilesetDock::TilesetDock(QWidget *parent):
     mEditTerrain->setIcon(QIcon(QLatin1String(":images/16x16/terrain.png")));
     mAddTiles->setIcon(QIcon(QLatin1String(":images/16x16/add.png")));
     mRemoveTiles->setIcon(QIcon(QLatin1String(":images/16x16/remove.png")));
-    mSearchForTile->setIcon(QIcon(QLatin1String(":images/16x16/document-new.png")));
 
     Utils::setThemeIcon(mNewTileset, "document-new");
     Utils::setThemeIcon(mImportTileset, "document-import");
@@ -250,7 +249,6 @@ TilesetDock::TilesetDock(QWidget *parent):
     Utils::setThemeIcon(mDeleteTileset, "edit-delete");
     Utils::setThemeIcon(mAddTiles, "add");
     Utils::setThemeIcon(mRemoveTiles, "remove");
-    Utils::setThemeIcon(mSearchForTile, "document-new");
 
     connect(mNewTileset, SIGNAL(triggered()),
             SIGNAL(newTileset()));
@@ -784,7 +782,7 @@ void TilesetDock::retranslateUi()
     mEditTerrain->setText(tr("Edit &Terrain Information"));
     mAddTiles->setText(tr("Add Tiles"));
     mRemoveTiles->setText(tr("Remove Tiles"));
-    mNewTileset->setText(tr("Search For Tile"));
+    mSearchForTile->setText(tr("Search For Tile"));
 }
 
 Tileset *TilesetDock::currentTileset() const
