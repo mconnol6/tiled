@@ -30,9 +30,9 @@ using namespace Tiled;
 using namespace Tiled::Internal;
 
 SelectSameTileTool::SelectSameTileTool(QObject *parent)
-    : AbstractTileTool(tr("Select Same Tile"),
+    : AbstractTileTool(tr("Select Same Custom Property Tiles"),
                        QIcon(QLatin1String(
-                               ":images/22x22/stock-tool-by-color-select.png")),
+                               ":images/16x16/document-new.png")),
                        QKeySequence(tr("S")),
                        parent)
 {
@@ -86,6 +86,6 @@ void SelectSameTileTool::mouseReleased(QGraphicsSceneMouseEvent *)
 
 void SelectSameTileTool::languageChanged()
 {
-    setName(tr("Select Same Tile"));
-    setShortcut(QKeySequence(tr("S")));
+    setName(tr("Select Same Custom Property Tiles"));
+    //setShortcut(QKeySequence(tr("S")));
 }

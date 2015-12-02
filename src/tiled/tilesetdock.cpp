@@ -190,6 +190,7 @@ TilesetDock::TilesetDock(QWidget *parent):
     mCurrentTile(0),
     mCurrentTiles(0),
     mNewTileset(new QAction(this)),
+    mSelectAllTiles(new QAction(this)),
     mImportTileset(new QAction(this)),
     mExportTileset(new QAction(this)),
     mPropertiesTileset(new QAction(this)),
@@ -233,6 +234,7 @@ TilesetDock::TilesetDock(QWidget *parent):
     vertical->addLayout(horizontal);
 
     mNewTileset->setIcon(QIcon(QLatin1String(":images/16x16/document-new.png")));
+    mSelectAllTiles->setIcon(QIcon(QLatin1String(":images/16x16/document-new.png")));
     mImportTileset->setIcon(QIcon(QLatin1String(":images/16x16/document-import.png")));
     mExportTileset->setIcon(QIcon(QLatin1String(":images/16x16/document-export.png")));
     mPropertiesTileset->setIcon(QIcon(QLatin1String(":images/16x16/document-properties.png")));
@@ -242,6 +244,7 @@ TilesetDock::TilesetDock(QWidget *parent):
     mRemoveTiles->setIcon(QIcon(QLatin1String(":images/16x16/remove.png")));
 
     Utils::setThemeIcon(mNewTileset, "document-new");
+    Utils::setThemeIcon(mSelectAllTiles, "document-new");
     Utils::setThemeIcon(mImportTileset, "document-import");
     Utils::setThemeIcon(mExportTileset, "document-export");
     Utils::setThemeIcon(mPropertiesTileset, "document-properties");
@@ -251,6 +254,8 @@ TilesetDock::TilesetDock(QWidget *parent):
 
     connect(mNewTileset, SIGNAL(triggered()),
             SIGNAL(newTileset()));
+    connect(mSelectAllTiles, SIGNAL(triggered()),
+	    SIGNAL(selectAllTiles()));
     connect(mImportTileset, SIGNAL(triggered()),
             SLOT(importTileset()));
     connect(mExportTileset, SIGNAL(triggered()),
@@ -267,6 +272,7 @@ TilesetDock::TilesetDock(QWidget *parent):
             SLOT(removeTiles()));
 
     mToolBar->addAction(mNewTileset);
+    //mToolBar->addAction(mSelectAllTiles);
     mToolBar->setIconSize(QSize(16, 16));
     mToolBar->addAction(mImportTileset);
     mToolBar->addAction(mExportTileset);
@@ -771,6 +777,7 @@ void TilesetDock::retranslateUi()
 {
     setWindowTitle(tr("Tilesets"));
     mNewTileset->setText(tr("New Tileset"));
+    mSelectAllTiles->setText(tr("Select All Tiles"));
     mImportTileset->setText(tr("&Import Tileset"));
     mExportTileset->setText(tr("&Export Tileset As..."));
     mPropertiesTileset->setText(tr("Tile&set Properties"));

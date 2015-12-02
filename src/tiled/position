@@ -1,0 +1,116 @@
+abstracttiletool.cpp:        QString tileIdString = tile ? QString::number(tile->id()) : tr("empty");
+mapscene.cpp:        if (!cell.isEmpty() && cell.tile->tileset() == tileset)
+bucketfilltool.cpp:                    mRandomCellPicker.add(cell, cell.tile->probability());
+createtileobjecttool.cpp:    const QSize imgSize = mNewMapObjectItem->mapObject()->cell().tile->size();
+tilesetdock.cpp:                Tileset *tileset = tile->tileset();
+tilesetdock.cpp:                return tile->tileset() == tileset;
+tilesetdock.cpp:            tileIds.insert(tile->id());
+tilesetmodel.cpp:            return tile->image();
+tilesetmodel.cpp:            return tile->terrain();
+tilesetmodel.cpp:    Q_ASSERT(tile->tileset() == mTileset);
+tilesetmodel.cpp:    const int id = tile->id();
+tilesetmodel.cpp:    if (tile->tileset() != mTileset)
+objectselectiontool.cpp:        const QSize imgSize = tile->image().size();
+objectselectiontool.cpp:        const QPoint tileOffset = tile->tileset()->tileOffset();
+mainwindow.cpp:			if (tile->hasProperty(property)) {
+mainwindow.cpp:				selection += tile->position();
+propertybrowser.cpp:        mIdToProperty[IdProperty]->setValue(tile->id());
+propertybrowser.cpp:        mIdToProperty[TileProbabilityProperty]->setValue(tile->probability());
+tilesetview.cpp:    const QPixmap &tileImage = tile->image();
+tilesetview.cpp:    if (mTilesetView->markAnimatedTiles() && tile->isAnimated()) {
+tilesetview.cpp:        const unsigned terrain = tile->terrain();
+tilesetview.cpp:        const QSize tileSize = tile->size() * mTilesetView->scale();
+tilesetview.cpp:    unsigned terrain = setTerrainCorner(tile->terrain(),
+tilesetview.cpp:    if (terrain == tile->terrain())
+changetileterrain.cpp:    , mTileset(tile->tileset())
+changetileterrain.cpp:    mChanges.insert(tile, Change(tile->terrain(), terrain));
+changetileterrain.cpp:        tile->setTerrain(change.from);
+changetileterrain.cpp:        tile->setTerrain(change.to);
+editterraindialog.cpp:                                   QString(), tile ? tile->id() : -1);
+editterraindialog.cpp:        unsigned tileTerrain = tile->terrain();
+editterraindialog.cpp:            if (tile->cornerTerrainId(corner) == terrain->id())
+editterraindialog.cpp:        if (tileTerrain != tile->terrain()) {
+editterraindialog.cpp:            changes.insert(tile, ChangeTileTerrain::Change(tile->terrain(),
+editterraindialog.cpp:                                                        tile->id()));
+objectselectionitem.cpp:        const QSize imgSize = tile->image().size();
+objectselectionitem.cpp:        const QPoint tileOffset = tile->tileset()->tileOffset();
+stampbrush.cpp:                    mRandomCellPicker.add(cell, cell.tile->probability());
+terrainbrush.cpp:    Terrain *t = cell.tile->terrainAtCorner(0);
+terrainbrush.cpp:    return tile ? tile->terrain() : 0xFFFFFFFF;
+terrainbrush.cpp:            tileset = tile->tileset();
+terrainbrush.cpp:                if (tile && tile->tileset() != tileset)
+terrainbrush.cpp:            if (preferredTerrain == currentTerrain && (!tile || tile->tileset() == tileset))
+terrainbrush.cpp:            if (tile && tile->tileset() != tileset)
+tilecollisioneditor.cpp:        Map *map = new Map(Map::Orthogonal, 1, 1, tile->width(), tile->height());
+tilecollisioneditor.cpp:        map->addTileset(tile->sharedTileset());
+tilecollisioneditor.cpp:        if (tile->objectGroup())
+tilecollisioneditor.cpp:            objectGroup = static_cast<ObjectGroup*>(tile->objectGroup()->clone());
+tilecollisioneditor.cpp:    if (tile->objectGroup())
+tilecollisioneditor.cpp:        objectGroup = static_cast<ObjectGroup*>(tile->objectGroup()->clone());
+tileanimationeditor.cpp:            return tile->image();
+tileanimationeditor.cpp:        mFrameListModel->setFrames(tile->tileset(), tile->frames());
+tileanimationeditor.cpp:        TilesetModel *tilesetModel = new TilesetModel(tile->tileset(),
+tileanimationeditor.cpp:    mUi->frameList->setEnabled(tile && !tile->tileset()->isExternal());
+tileanimationeditor.cpp:    mFrameListModel->setFrames(tile->tileset(), tile->frames());
+tileanimationeditor.cpp:    mFrameListModel->addTileIdAsFrame(tile->id());
+tileanimationeditor.cpp:            mUi->preview->setPixmap(tile->image());
+tileanimationeditor.cpp:            mUi->preview->setPixmap(tile->image());
+tilesetmanager.cpp:            imageChanged |= tile->advanceAnimation(ms);
+properties:abstracttiletool.cpp:        QString tileIdString = tile ? QString::number(tile->id()) : tr("empty");
+properties:mapscene.cpp:        if (!cell.isEmpty() && cell.tile->tileset() == tileset)
+properties:bucketfilltool.cpp:                    mRandomCellPicker.add(cell, cell.tile->probability());
+properties:createtileobjecttool.cpp:    const QSize imgSize = mNewMapObjectItem->mapObject()->cell().tile->size();
+properties:tilesetdock.cpp:                Tileset *tileset = tile->tileset();
+properties:tilesetdock.cpp:                return tile->tileset() == tileset;
+properties:tilesetdock.cpp:            tileIds.insert(tile->id());
+properties:tilesetmodel.cpp:            return tile->image();
+properties:tilesetmodel.cpp:            return tile->terrain();
+properties:tilesetmodel.cpp:    Q_ASSERT(tile->tileset() == mTileset);
+properties:tilesetmodel.cpp:    const int id = tile->id();
+properties:tilesetmodel.cpp:    if (tile->tileset() != mTileset)
+properties:objectselectiontool.cpp:        const QSize imgSize = tile->image().size();
+properties:objectselectiontool.cpp:        const QPoint tileOffset = tile->tileset()->tileOffset();
+properties:mainwindow.cpp:		if (tile->hasProperty(property)) {
+properties:mainwindow.cpp:			if (tile->property(property) == value) {
+properties:propertybrowser.cpp:        mIdToProperty[IdProperty]->setValue(tile->id());
+properties:propertybrowser.cpp:        mIdToProperty[TileProbabilityProperty]->setValue(tile->probability());
+properties:tilesetview.cpp:    const QPixmap &tileImage = tile->image();
+properties:tilesetview.cpp:    if (mTilesetView->markAnimatedTiles() && tile->isAnimated()) {
+properties:tilesetview.cpp:        const unsigned terrain = tile->terrain();
+properties:tilesetview.cpp:        const QSize tileSize = tile->size() * mTilesetView->scale();
+properties:tilesetview.cpp:    unsigned terrain = setTerrainCorner(tile->terrain(),
+properties:tilesetview.cpp:    if (terrain == tile->terrain())
+properties:changetileterrain.cpp:    , mTileset(tile->tileset())
+properties:changetileterrain.cpp:    mChanges.insert(tile, Change(tile->terrain(), terrain));
+properties:changetileterrain.cpp:        tile->setTerrain(change.from);
+properties:changetileterrain.cpp:        tile->setTerrain(change.to);
+properties:editterraindialog.cpp:                                   QString(), tile ? tile->id() : -1);
+properties:editterraindialog.cpp:        unsigned tileTerrain = tile->terrain();
+properties:editterraindialog.cpp:            if (tile->cornerTerrainId(corner) == terrain->id())
+properties:editterraindialog.cpp:        if (tileTerrain != tile->terrain()) {
+properties:editterraindialog.cpp:            changes.insert(tile, ChangeTileTerrain::Change(tile->terrain(),
+properties:editterraindialog.cpp:                                                        tile->id()));
+properties:objectselectionitem.cpp:        const QSize imgSize = tile->image().size();
+properties:objectselectionitem.cpp:        const QPoint tileOffset = tile->tileset()->tileOffset();
+properties:stampbrush.cpp:                    mRandomCellPicker.add(cell, cell.tile->probability());
+properties:terrainbrush.cpp:    Terrain *t = cell.tile->terrainAtCorner(0);
+properties:terrainbrush.cpp:    return tile ? tile->terrain() : 0xFFFFFFFF;
+properties:terrainbrush.cpp:            tileset = tile->tileset();
+properties:terrainbrush.cpp:                if (tile && tile->tileset() != tileset)
+properties:terrainbrush.cpp:            if (preferredTerrain == currentTerrain && (!tile || tile->tileset() == tileset))
+properties:terrainbrush.cpp:            if (tile && tile->tileset() != tileset)
+properties:tilecollisioneditor.cpp:        Map *map = new Map(Map::Orthogonal, 1, 1, tile->width(), tile->height());
+properties:tilecollisioneditor.cpp:        map->addTileset(tile->sharedTileset());
+properties:tilecollisioneditor.cpp:        if (tile->objectGroup())
+properties:tilecollisioneditor.cpp:            objectGroup = static_cast<ObjectGroup*>(tile->objectGroup()->clone());
+properties:tilecollisioneditor.cpp:    if (tile->objectGroup())
+properties:tilecollisioneditor.cpp:        objectGroup = static_cast<ObjectGroup*>(tile->objectGroup()->clone());
+properties:tileanimationeditor.cpp:            return tile->image();
+properties:tileanimationeditor.cpp:        mFrameListModel->setFrames(tile->tileset(), tile->frames());
+properties:tileanimationeditor.cpp:        TilesetModel *tilesetModel = new TilesetModel(tile->tileset(),
+properties:tileanimationeditor.cpp:    mUi->frameList->setEnabled(tile && !tile->tileset()->isExternal());
+properties:tileanimationeditor.cpp:    mFrameListModel->setFrames(tile->tileset(), tile->frames());
+properties:tileanimationeditor.cpp:    mFrameListModel->addTileIdAsFrame(tile->id());
+properties:tileanimationeditor.cpp:            mUi->preview->setPixmap(tile->image());
+properties:tileanimationeditor.cpp:            mUi->preview->setPixmap(tile->image());
+properties:tilesetmanager.cpp:            imageChanged |= tile->advanceAnimation(ms);

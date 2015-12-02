@@ -27,10 +27,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <iostream>
+
+#include "brushitem.h"
+#include "propertybrowser.h"
+#include "tilesetview.h"
+#include "mapdocument.h"
+#include "tilesetdock.h"
 #include "aboutdialog.h"
+#include "abstracttiletool.h"
+#include "abstracttool.h"
 #include "addremovemapobject.h"
 #include "automappingmanager.h"
 #include "addremovetileset.h"
+#include "changeselectedarea.h"
 #include "clipboardmanager.h"
 #include "createobjecttool.h"
 #include "createrectangleobjecttool.h"
@@ -45,10 +55,12 @@
 #include "exportasimagedialog.h"
 #include "bucketfilltool.h"
 #include "filltiles.h"
+#include "geometry.h"
 #include "languagemanager.h"
 #include "layer.h"
 #include "layerdock.h"
 #include "layermodel.h"
+#include "magicwandtool.h"
 #include "map.h"
 #include "mapdocument.h"
 #include "mapdocumentactionhandler.h"
@@ -73,6 +85,7 @@
 #include "terrainbrush.h"
 #include "tile.h"
 #include "tilelayer.h"
+#include "tilepainter.h"
 #include "tileselectiontool.h"
 #include "tileset.h"
 #include "tilesetdock.h"
@@ -99,6 +112,7 @@
 #include "macsupport.h"
 #endif
 
+#include <QApplication>
 #include <QMimeData>
 #include <QCloseEvent>
 #include <QComboBox>
@@ -326,6 +340,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
     menuBar()->insertMenu(mUi->menuHelp->menuAction(), mLayerMenu);
 
+    connect(mUi->actionSelectAllTiles, SIGNAL(triggered()), SLOT(selectAllTiles()));
     connect(mUi->actionNew, SIGNAL(triggered()), SLOT(newMap()));
     connect(mUi->actionOpen, SIGNAL(triggered()), SLOT(openFile()));
     connect(mUi->actionClearRecentFiles, SIGNAL(triggered()),
@@ -394,6 +409,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
     mUi->menuRecentFiles->insertSeparator(mUi->actionClearRecentFiles);
 
     setThemeIcon(mUi->actionNew, "document-new");
+    setThemeIcon(mUi->actionSelectAllTiles, "document-new");
     setThemeIcon(mUi->actionOpen, "document-open");
     setThemeIcon(mUi->menuRecentFiles, "document-open-recent");
     setThemeIcon(mUi->actionClearRecentFiles, "edit-clear");
@@ -438,6 +454,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
             mTileCollisionEditor, &TileCollisionEditor::setTile);
     connect(mTilesetDock, SIGNAL(newTileset()),
             this, SLOT(newTileset()));
+    connect(mTilesetDock, SIGNAL(selectAllTiles()),
+	    this, SLOT(selectAllTiles()));
 
     connect(mTerrainDock, SIGNAL(currentTerrainChanged(const Terrain*)),
             this, SLOT(setTerrainBrush(const Terrain*)));
@@ -1473,6 +1491,7 @@ void MainWindow::updateActions()
             || objectsSelected;
 
     mUi->actionSave->setEnabled(map);
+    mUi->actionSelectAllTiles->setEnabled(map);
     mUi->actionSaveAs->setEnabled(map);
     mUi->actionSaveAll->setEnabled(map);
     mUi->actionExportAsImage->setEnabled(map);
@@ -1773,4 +1792,89 @@ void MainWindow::closeMapDocument(int index)
 void MainWindow::reloadError(const QString &error)
 {
     QMessageBox::critical(this, tr("Error Reloading Map"), error);
+}
+
+
+void MainWindow::getTilePos (Tile *tile, QRegion mSelectedRegion)
+{
+
+    Layer *currentLayer = mMapDocument->currentLayer();
+    TileLayer *tileLayer = dynamic_cast<TileLayer*>(currentLayer);
+    if(!tileLayer) return;
+    
+    //test
+    QPoint p(0,0);
+
+    //take into account offset of current layer
+    QPointF offsetPos = p;
+    //if (Layer *layer = tileLayer) {
+	offsetPos -= tileLayer->offset();
+	//mBrushItem->setLayerOffset(layer->offset());
+    //}
+
+    const MapRenderer *renderer = mMapDocument->renderer();
+
+    const QPointF tilePosF = renderer->screenToTileCoords(p);
+    QPoint tilePos;
+
+    tilePos = QPoint((int) std::floor(tilePosF.x()), 
+		     (int) std::floor(tilePosF.y()));
+    std::cout << tilePos.x() << " " << tilePos.y() << std::endl;
+
+
+    /*QPoint tilePos = tilePosition();
+    TilePainter regionComputer(mMapDocument, tileLayer);
+    mSelectedRegion = regionComputer.computeFillRegion(tilePos);
+    //mBrushItem->setTileRegion(mSelectedRegion);*/
+
+   
+
+    //should be tilePos instead of p for contains() and cellAt()
+    QRegion resultRegion;
+    if (tileLayer->contains(p)) {
+       std::cout <<"I work" << std::endl;
+       const Cell &matchCell = tileLayer->cellAt(p);
+       resultRegion = tileLayer->region([&] (const Cell &cell) {return cell == matchCell; });
+    }
+
+    mSelectedRegion = resultRegion;
+
+}
+
+
+void MainWindow::selectAllTiles()
+{
+    if (!mMapDocument)
+	return;
+  
+    std::cout << "pls stop segfaulting" << std::endl;
+
+    
+    QRegion mSelectedRegion;
+
+    QRegion selection = mMapDocument->selectedArea();
+
+    TilesetManager *tilesetManager = TilesetManager::instance();
+
+    QList<SharedTileset> tilesets = tilesetManager->tilesets();
+
+    QString property = tr("stuff"); 
+
+    //for (QString property : properties) {   
+
+    	for (SharedTileset &tileset : tilesets) {
+	
+		for (Tile* tile : tileset->tiles()) {
+		
+			if (tile->hasProperty(property)) {
+
+				getTilePos(tile, mSelectedRegion);
+				//selection += mSelectedRegion;
+				mMapDocument->setSelectedArea(mSelectedRegion);
+				std::cout << "I am working" << std::endl;
+
+			}
+		}		
+	}
+    //}
 }

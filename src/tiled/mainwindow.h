@@ -145,6 +145,8 @@ private slots:
     void resizeMap();
     void offsetMap();
     void editMapProperties();
+    void selectAllTiles();
+    void getTilePos (Tile *tile, QRegion region);
 
     void updateWindowTitle();
     void updateActions();
@@ -217,6 +219,7 @@ private:
     void retranslateUi();
 
     Ui::MainWindow *mUi;
+    //BrushItem *mBrushItem;
     MapDocument *mMapDocument;
     MapDocumentActionHandler *mActionHandler;
     LayerDock *mLayerDock;
