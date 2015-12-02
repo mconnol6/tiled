@@ -141,7 +141,6 @@ SOURCES += aboutdialog.cpp \
     resizemapobject.cpp \
     resizetilelayer.cpp \
     rotatemapobject.cpp \
-    searchfortiledialog.cpp \
     selectionrectangle.cpp \
     selectsametiletool.cpp \
     snaphelper.cpp \
@@ -283,7 +282,6 @@ HEADERS += aboutdialog.h \
     resizemapobject.h \
     resizetilelayer.h \
     rotatemapobject.h \
-    searchfortiledialog.h \
     selectionrectangle.h \
     selectsametiletool.h \
     snaphelper.h \
